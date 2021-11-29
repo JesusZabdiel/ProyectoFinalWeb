@@ -17,6 +17,9 @@ const Movie = mongoose.Schema({
     descripcion:{
         type: String,
         required: false
+    },
+    imagen: {
+        type: String
     }
 })
 
