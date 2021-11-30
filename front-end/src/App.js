@@ -16,15 +16,18 @@ class Reviews extends React.Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/Reviews/reviews')
-    .then(result =>{
-      console.log(result.data)
-      this.state = result
+    //consumiento servicio get
+    fetch("http://localhost:8080/Reviews/reviews")
+    .then(res=>res.json())
+    .then(datos =>{
+      console.log(datos)
+      this.setState({
+        reseñas :datos
+      })
     })
     .catch(err=>{
-      console.log(err)
+      console.log(console.error())
     })
-    
   }
 
   render(){
@@ -54,37 +57,39 @@ class Movies extends React.Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/Movies/movies')
-    .then(result =>{
-      console.log(result.data)
-      this.state.peliculas = result
+    //consumiento servicio get
+    fetch("http://localhost:8080/Movies/movies")
+    .then(res=>res.json())
+    .then(datos =>{
+      console.log(datos)
+      this.setState({
+        peliculas :datos
+      })
     })
     .catch(err=>{
-      console.log(err)
+      console.log(console.error())
     })
-    
   }
 
-
-  render(){
-    console.log(this.state.movies)
-    const moviesActuales = this.state.peliculas.map((movie, id)=>{
+  const moviesActuales = this.state.peliculas.map((movie, id)=>{
+    if (id % 3 == 0 || id == 0){
       return(
+        <div className="row">
           <div className="col-md-4">
             <CardMovie titulo={movie.titulo} calificacion={movie.avgScore}></CardMovie>
           </div>
-      
-        )
-    })
+        </div>
 
-    return(
-      <div>
-        {moviesActuales}
-      </div>
-      
-    )
+      )
+    }else{
+      return(
+        <div className="col-md-4">
+            <CardMovie titulo={movie.titulo} calificacion={movie.avgScore}></CardMovie>
+        </div>
+      )
+    }
 
-  }
+  })
 
 }
 
