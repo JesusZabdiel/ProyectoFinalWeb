@@ -7,7 +7,7 @@ import {Route, Routes, Link, Outlet} from 'react-dom'
 import CardReview from './components/CardReseña';
 
 
-class Reviews extends React.Component{
+class Reviews extends React.Component{ 
   constructor(){
     super()
     this.state = {
@@ -101,7 +101,7 @@ function App() {
     <div className="App">
       <NavBar/>
       <Movies/>
-      <Reviews></Reviews>
+      <Reviews/>
     </div>
   );
 

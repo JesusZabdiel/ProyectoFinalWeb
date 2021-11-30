@@ -2,7 +2,7 @@ import {React, useState} from "react";
 import {Route, Routes, Link, Outlet} from 'react-dom'
 
 
-function NavBar() {
+function NavBar() { 
     return(
         <div>            
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="navbar">
