@@ -58,7 +58,7 @@ class FormularioEditR extends React.Component {
             <input onChange={this.handleInput}  className="form-control mb-5" type="number" min={1} max={5} name="score"/>
             <label>Escribe tu nueva reseña</label>
             <input onChange={this.handleInput} className="form-control mb-5" type="text" name="reseñaTexto"/>
-            <button className="btn btn-success" type="button" onClick={this.handleSumbit}>Añadir</button>
+            <button className="btn btn-warning" type="button" onClick={this.handleSumbit}>Actualizar</button>
     
             </div>)
 

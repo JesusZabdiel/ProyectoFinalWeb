@@ -6,9 +6,7 @@ class FormularioDeleteR extends React.Component {
     constructor(){
         super()
         this.state={
-            _id:"",
-            score: 0,
-            reseñaTexto:"",
+            _id:""
         }
     }
 
@@ -21,15 +19,13 @@ class FormularioDeleteR extends React.Component {
     }
 
     handleSumbit = async () => {
-        const res = await fetch("http://localhost:8080/Reviews/addReview", {
+        const res = await fetch("http://localhost:8080/Reviews/deleteReview", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              movie: this.state.movie,
-              score: this.state.score,
-              reseñaTexto: this.state.reseñaTexto
+              _id: this.state._id,
             })
           }
         )
@@ -42,13 +38,9 @@ class FormularioDeleteR extends React.Component {
                 <h2>Ingresa los datos de tu película</h2>
     
 
-            <label>Película de la reseña</label>    
-            <input onChange={this.handleInput}  className="form-control mb-5" type="text" name="movie"/>
-            <label>Calificación del 1 al 5</label> 
-            <input onChange={this.handleInput}  className="form-control mb-5" type="number" min={1} max={5} name="score"/>
-            <label>Escribe tu reseña</label>
-            <input onChange={this.handleInput} className="form-control mb-5" type="text" name="reseñaTexto"/>
-            <button className="btn btn-success" type="button" onClick={this.handleSumbit}>Añadir</button>
+            <label>Id de la reseña</label>    
+            <input onChange={this.handleInput}  className="form-control mb-5" type="text" name="_id"/>
+            <button className="btn btn-danger" type="button" onClick={this.handleSumbit}>Borrar</button>
     
             </div>        )
 

@@ -2,6 +2,8 @@ import {React, useState} from "react";
 
 function CardReview (props){
 
+    const [_id ,setId] = useState(props._id)
+
     
     return(
         <div className="card my-5 bg-secondary">
@@ -10,10 +12,6 @@ function CardReview (props){
             <p>{props.reseñaTexto}</p>
             <h4>Calificación</h4>
             <h4>{props.score}</h4>
-
-            <div className="card-footer">
-                <button className="btn btn-danger mx-3">Eliminar</button>
-            </div>
             
         </div>
     )

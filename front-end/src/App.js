@@ -8,6 +8,9 @@ import CardReview from './components/CardReseña';
 import FormularioPelicula from './components/FormularioPelicula'
 import FormularioReseña from './components/FormularioReseña';
 import FormularioEditR from './components/FormularioEditR';
+import FormularioDeleteR from './components/FormularioDeleteR';
+
+
 
 
 class Reviews extends React.Component{ 
@@ -33,17 +36,14 @@ class Reviews extends React.Component{
     })
   }
 
-  eliminarReseña = async (id) =>{
-    const res = await fetch("http://localhost:8080/Reviews/deleteReview", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              _id: id
-            })
-          }
-        )
+
+  eliminar = (id) =>{
+    this.setState({
+      reseñas: this.state.reseñas.filter((e,i)=>{
+        return i!==id
+      })
+    })
+
   }
 
 
@@ -51,7 +51,7 @@ class Reviews extends React.Component{
     const reseñasActuales = this.state.reseñas.map((reseña, id,)=>{
       return(
         <div className="col-md-4">
-          <CardReview _id={reseña._id}score={reseña.score} movie={reseña.movie} reseñaTexto= {reseña.reseñaTexto} onEliminarReseña={this.eliminarReseña}></CardReview>
+          <CardReview _id={reseña._id} score={reseña.score} movie={reseña.movie} reseñaTexto= {reseña.reseñaTexto} onEliminar={this.eliminar}></CardReview>
         </div>
       )
     })
@@ -80,7 +80,6 @@ class Movies extends React.Component{
       peliculas : []
     }
   }
-
 
 
   componentDidMount(){
@@ -142,7 +141,8 @@ function App() {
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
         <Route path="/addMovie" element={<FormularioPelicula></FormularioPelicula>}></Route>
         <Route path="/addReview" element={<FormularioReseña></FormularioReseña>}></Route>
-        <Route path="/editreview" element={<FormularioEditR></FormularioEditR>}></Route>
+        <Route path="/editReview" element={<FormularioEditR></FormularioEditR>}></Route>
+        <Route path="/deleteReview" element={<FormularioDeleteR></FormularioDeleteR>}></Route>
 
       </Routes>
 
