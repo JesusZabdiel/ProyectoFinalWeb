@@ -24,7 +24,8 @@ exports.postAddMovie =  async (req, res)=>{
         res.send({status: "Movie added correctly"})
         console.log(newMovie)
         
-    }catch{
+    }catch(err){
+        console.log(err)
         res.send({status: "Error while adding a movie"} )
     }    
 

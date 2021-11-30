@@ -1,5 +1,5 @@
 import {React, useState} from "react";
-import {Route, Routes, Link, Outlet} from 'react-dom'
+import {Route, Routes, Link, Outlet} from 'react-router-dom'
 
 
 function NavBar() { 
@@ -11,8 +11,8 @@ function NavBar() {
 
                     <div class="collapse navbar-collapse" id="navbarDepliegable">
                         <div class="navbar-nav">
-                            <span class="nav-link">Películas</span>
-                            <span class="nav-link">Reseñas </span>
+                            <span class="nav-link" ><Link to="/" style={{ textDecoration: 'none' }}>Películas</Link></span>
+                            <span class="nav-link"><Link to="/reviews" style={{ textDecoration: 'none' }}>Reseñas</Link></span>
                         </div>
                     </div>     
                 </div>

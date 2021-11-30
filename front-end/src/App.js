@@ -3,8 +3,9 @@ import './App.css';
 import CardMovie from './components/CardMovie';
 import NavBar from './components/NavBar';
 import React, { useState } from 'react';
-import {Route, Routes, Link, Outlet} from 'react-dom'
+import {Route, Routes, Link, Outlet} from 'react-router-dom'
 import CardReview from './components/CardReseña';
+import FormularioPelicula from './components/FormularioPelicula'
 
 
 class Reviews extends React.Component{ 
@@ -33,15 +34,23 @@ class Reviews extends React.Component{
   render(){
     const reseñasActuales = this.state.reseñas.map((reseña, id,)=>{
       return(
-        <div className="container">
-          <CardReview titulo={reseña.titulo} movie={reseña.movie}></CardReview>
+        <div className="col-md-4">
+          <CardReview score={reseña.score} movie={reseña.movie} reseñaTexto= {reseña.reseñaTexto}></CardReview>
         </div>
       )
     })
     return(
       <div>
         <h1>Reviews</h1>
-        {reseñasActuales}
+        <div className="container bg-ligth">
+            <button className="btn btn-success"><Link to="/addReview">Añadir Reseña</Link></button>
+            <button className="btn btn-success"><Link to="/addReview">Borrar Reseña</Link></button>
+            <button className="btn btn-success"><Link to="/addReview">Actualizar Reseña</Link></button>
+          </div>
+        <div className="row mb-5">
+          {reseñasActuales}
+        </div>
+        
       </div>
     )
   }
@@ -55,6 +64,8 @@ class Movies extends React.Component{
       peliculas : []
     }
   }
+
+
 
   componentDidMount(){
     //consumiento servicio get
@@ -71,25 +82,35 @@ class Movies extends React.Component{
     })
   }
 
-  const moviesActuales = this.state.peliculas.map((movie, id)=>{
-    if (id % 3 == 0 || id == 0){
-      return(
-        <div className="row">
-          <div className="col-md-4">
-            <CardMovie titulo={movie.titulo} calificacion={movie.avgScore}></CardMovie>
-          </div>
-        </div>
-
-      )
-    }else{
+  render(){
+    const movies = this.state.peliculas.map((movie, index)=>{
       return(
         <div className="col-md-4">
-            <CardMovie titulo={movie.titulo} calificacion={movie.avgScore}></CardMovie>
+        <CardMovie titulo={movie.titulo} calificacion={movie.avgScore} imagen={movie.imagen}></CardMovie>
         </div>
       )
-    }
 
-  })
+    })
+    return(
+      <div>
+        <br/>
+        <h1 className="h1 ">Peliculas</h1>
+        <div className="container bg-ligth my-3">
+          <h6>¿No encuentras tu película?</h6>
+          <div className="container bg-ligth">
+            <button className="btn btn-success"><Link to="/addMovie">Añadir Película</Link></button>
+          </div>
+          <br></br>
+        </div>
+        
+
+
+        <div className="row mb-5">
+          {movies}
+        </div>
+      </div>
+    )
+  }
 
 }
 
@@ -100,10 +121,15 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      <Movies/>
-      <Reviews/>
+      <Routes>        
+        <Route path="/" element={<Movies></Movies>}></Route>
+        <Route path="/reviews" element={<Reviews></Reviews>}></Route>
+        <Route path="/addMovie" element={<FormularioPelicula></FormularioPelicula>}></Route>
+
+      </Routes>
+
     </div>
-  );
+  )
 
   
 }

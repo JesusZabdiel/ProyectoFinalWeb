@@ -2,9 +2,13 @@ import {React, useState} from "react";
 
 function CardReview (props){
     return(
-        <div className="card">
-            <h4>{props.score}</h4>
+        <div className="card my-5 bg-warning">
+
             <h4>{props.movie}</h4>
+            <p>{props.reseñaTexto}</p>
+            <h4>Calificación</h4>
+            <h4>{props.score}</h4>
+            
         </div>
     )
 }
