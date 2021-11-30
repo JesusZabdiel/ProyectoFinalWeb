@@ -11,7 +11,7 @@ function NavBar() {
 
                     <div class="collapse navbar-collapse" id="navbarDepliegable">
                         <div class="navbar-nav">
-                            <span class="nav-link" ><Link to="/" style={{ textDecoration: 'none' }}>Películas</Link></span>
+                            <span class="nav-link" ><Link to="/" style={{ textDecoration: 'none'}}>Películas</Link></span>
                             <span class="nav-link"><Link to="/reviews" style={{ textDecoration: 'none' }}>Reseñas</Link></span>
                         </div>
                     </div>     

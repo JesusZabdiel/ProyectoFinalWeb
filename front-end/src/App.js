@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 import {Route, Routes, Link, Outlet} from 'react-router-dom'
 import CardReview from './components/CardReseña';
 import FormularioPelicula from './components/FormularioPelicula'
+import FormularioReseña from './components/FormularioReseña';
+import FormularioEditR from './components/FormularioEditR';
 
 
 class Reviews extends React.Component{ 
@@ -31,21 +33,35 @@ class Reviews extends React.Component{
     })
   }
 
+  eliminarReseña = async (id) =>{
+    const res = await fetch("http://localhost:8080/Reviews/deleteReview", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              _id: id
+            })
+          }
+        )
+  }
+
+
   render(){
     const reseñasActuales = this.state.reseñas.map((reseña, id,)=>{
       return(
         <div className="col-md-4">
-          <CardReview score={reseña.score} movie={reseña.movie} reseñaTexto= {reseña.reseñaTexto}></CardReview>
+          <CardReview _id={reseña._id}score={reseña.score} movie={reseña.movie} reseñaTexto= {reseña.reseñaTexto} onEliminarReseña={this.eliminarReseña}></CardReview>
         </div>
       )
     })
     return(
       <div>
         <h1>Reviews</h1>
-        <div className="container bg-ligth">
-            <button className="btn btn-success"><Link to="/addReview">Añadir Reseña</Link></button>
-            <button className="btn btn-success"><Link to="/addReview">Borrar Reseña</Link></button>
-            <button className="btn btn-success"><Link to="/addReview">Actualizar Reseña</Link></button>
+        <div className="container bg-ligth justify-content-around">
+            <button className="btn btn-success mx-5"><Link to="/addReview" style={{ textDecoration: 'none'}}>Añadir Reseña</Link></button>
+            <button className="btn btn-danger mx-5"><Link to="/deleteReview" style={{ textDecoration: 'none'}}>Borrar Reseña</Link></button>
+            <button className="btn btn-warning mx-5"><Link to="/editReview" style={{ textDecoration: 'none'}}>Actualizar Reseña</Link></button>
           </div>
         <div className="row mb-5">
           {reseñasActuales}
@@ -98,7 +114,7 @@ class Movies extends React.Component{
         <div className="container bg-ligth my-3">
           <h6>¿No encuentras tu película?</h6>
           <div className="container bg-ligth">
-            <button className="btn btn-success"><Link to="/addMovie">Añadir Película</Link></button>
+            <button className="btn btn-success"><Link to="/addMovie" style={{ textDecoration: 'none'}}>Añadir Película</Link></button>
           </div>
           <br></br>
         </div>
@@ -125,6 +141,8 @@ function App() {
         <Route path="/" element={<Movies></Movies>}></Route>
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
         <Route path="/addMovie" element={<FormularioPelicula></FormularioPelicula>}></Route>
+        <Route path="/addReview" element={<FormularioReseña></FormularioReseña>}></Route>
+        <Route path="/editreview" element={<FormularioEditR></FormularioEditR>}></Route>
 
       </Routes>
 
