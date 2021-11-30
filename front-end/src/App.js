@@ -7,7 +7,7 @@ import {Route, Routes, Link, Outlet} from 'react-dom'
 import CardReview from './components/CardReseña';
 
 
-class Reviews extends React.Component{
+class Reviews extends React.Component{ 
   constructor(){
     super()
     this.state = {
@@ -16,15 +16,18 @@ class Reviews extends React.Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/Reviews/reviews')
-    .then(result =>{
-      console.log(result.data)
-      this.state = result
+    //consumiento servicio get
+    fetch("http://localhost:8080/Reviews/reviews")
+    .then(res=>res.json())
+    .then(datos =>{
+      console.log(datos)
+      this.setState({
+        reseñas :datos
+      })
     })
     .catch(err=>{
-      console.log(err)
+      console.log(console.error())
     })
-    
   }
 
   render(){
@@ -54,15 +57,18 @@ class Movies extends React.Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/Movies/movies')
-    .then(result =>{
-      console.log(result.data)
-      this.state.peliculas = result
+    //consumiento servicio get
+    fetch("http://localhost:8080/Movies/movies")
+    .then(res=>res.json())
+    .then(datos =>{
+      console.log(datos)
+      this.setState({
+        peliculas :datos
+      })
     })
     .catch(err=>{
-      console.log(err)
+      console.log(console.error())
     })
-    
   }
 
 
@@ -96,7 +102,7 @@ function App() {
     <div className="App">
       <NavBar/>
       <Movies/>
-      <Reviews></Reviews>
+      <Reviews/>
     </div>
   );
 
